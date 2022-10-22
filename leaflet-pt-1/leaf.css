@@ -1,2 +1,13 @@
-#map { height: 180px; }
+body {
+    padding: 0;
+    margin: 0;
+}
+
+body, html {
+    height: 180%;
+}
+
+
+
+#map { height: 180%; }
 
