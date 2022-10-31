@@ -21,7 +21,7 @@ let topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 // create BaseMap object
 let base = {
     'street map': tile,
-    'topograph': topo
+    'topograph': topo,
 };
 
 // Create Overlay
@@ -38,7 +38,7 @@ let eMap = L.map('map', {
         40.7, -94.5
     ],
     zoom: 4,
-    layers:[eqs, tets]
+    layers:[tile]
 });
 // Create control layer
 L.control.layers(base, overlay, {
@@ -86,17 +86,17 @@ d3.json(geoApi).then(function(data){
 L.geoJSON(data, {
     pointToLayer: function(feature, latlng){
         console.log(data);
-        return L.circleMarkers(latlng);
+        return L.circleMarker(latlng);
     },
     style: styleInfo,
     onEachFeature: function(feature, layer) {
         layer.bindPopup('magnitude: '+feature.properties.mag+"<br>Location: " + feature.properties.place)}
-    }).addTo(earthquakes)
+    }).addTo(eqs)
     eqs.addTo(eMap)
    });
 
 // Create tetonic plates
-d3.json(tetURL).then(function (tplatedata) {
+d3.json(tetUrl).then(function (tplatedata) {
     // L.geojson layer
     L.geoJSON(tplatedata,{
       // add color
